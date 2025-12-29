@@ -22,7 +22,7 @@ The payload sent from the hub to the backend will include the following fields:
   "batteryMv": 3700,
   "fwVersion": "1.0.0"
 }
-
+```
 ## Transport (v0)
 - Probe → Hub uses BLE GATT (Option A).
 - Hub reads the latest reading from a GATT characteristic.
