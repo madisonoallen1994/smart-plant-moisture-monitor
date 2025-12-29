@@ -4,7 +4,7 @@ This document defines the payload format for v0 of the Smart Plant Moisture Moni
 
 ## Payload Format
 
-The payload sent by the probe will include the following fields:
+The payload sent from the hub to the backend will include the following fields:
 
 - **`probeId`** (string): Unique identifier for the probe.
 - **`timestamp`** (ISO string): The time the reading was generated. For v0, this can be hub-generated.
@@ -22,3 +22,8 @@ The payload sent by the probe will include the following fields:
   "batteryMv": 3700,
   "fwVersion": "1.0.0"
 }
+
+## Transport (v0)
+- Probe → Hub uses BLE GATT (Option A).
+- Hub reads the latest reading from a GATT characteristic.
+- Hub attaches timestamp and POSTs JSON to the backend.
