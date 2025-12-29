@@ -9,7 +9,7 @@ This folder contains all documentation for the Smart Plant Moisture Monitor v0 p
 
 ## Technical References
 - `contracts.md` – Data and interface contracts (v0)
-- `hub_ble.md` – BLE behavior and hub responsibilities
+- `hub_ble_v0.md` – BLE behavior and hub responsibilities
 - `normal_readings_reference.md` – What sensor values mean
 
 ## Runbooks (Day-of Execution)
@@ -20,3 +20,4 @@ See `runbooks/` for step-by-step checklists used when hardware arrives:
 
 ## Diagrams
 - v0 Architecture Diagram: `diagrams/architecture_v0.md`
+

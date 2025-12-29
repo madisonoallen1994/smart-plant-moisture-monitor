@@ -200,7 +200,7 @@ hardware day and then lock numeric thresholds.
 {
   "probeId": "probe-001",
   "timestamp": "2025-12-28T12:00:00Z",
-  "moistureRaw": "DRY_RAW",
+  "moistureRaw": 100  // example dry raw value; assumes wet > dry (invert ordering if sensor reports the opposite) 
   "batteryMv": 3700,
   "fwVersion": "1.0.0"
 }
@@ -214,7 +214,7 @@ hardware day and then lock numeric thresholds.
 {
   "probeId": "probe-001",
   "timestamp": "2025-12-28T12:00:00Z",
-  "moistureRaw": "MID_RAW",
+  "moistureRaw": 500  // example ideal raw value 
   "batteryMv": 3700,
   "fwVersion": "1.0.0"
 }
@@ -228,7 +228,7 @@ hardware day and then lock numeric thresholds.
 {
   "probeId": "probe-001",
   "timestamp": "2025-12-28T12:00:00Z",
-  "moistureRaw": "WET_RAW",
+  "moistureRaw": 800  // example wet raw value; assumes wet > dry (invert ordering if sensor reports the opposite) 
   "batteryMv": 3700,
   "fwVersion": "1.0.0"
 }
