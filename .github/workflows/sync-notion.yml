@@ -1,0 +1,27 @@
+name: Sync Notion docs
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6 * * *" # daily at 06:00 UTC (change anytime)
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Sync Notion pages to Markdown files
+        uses: YouXam/Notion-GitHub-Sync@v2
+        with:
+          notion_token: ${{ secrets.NOTION_TOKEN }}
+
+      - name: Commit changes (if any)
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "docs: sync from Notion"
+          file_pattern: docs/*.md
