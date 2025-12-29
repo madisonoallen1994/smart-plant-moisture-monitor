@@ -1,8 +1,8 @@
 import asyncio
-from hub.src.config import load_config
-from hub.src.logger import setup_logger
-from hub.src.ble_client import find_probe_address, poll_readings
-from hub.src.http_client import post_reading
+from config import load_config
+from logger import setup_logger
+from ble_client import find_probe_address, poll_readings
+from http_client import post_reading
 
 
 async def dry_run_loop(cfg, logger):
