@@ -34,6 +34,63 @@ Do not proceed until all prerequisites are met.
 
 In v0, calibration is **manual and observational**.
 
+## Direction Confirmation Checklist (required)
+
+Before recording any calibration values, confirm how this specific sensor reports moisture.
+
+Raw moisture direction is **sensor-dependent** and must be verified once per probe.
+
+Follow these steps in order.
+
+### Step 1: Read value in air
+
+1. Remove the probe from soil.
+2. Ensure the probe is clean and dry.
+3. Observe the reported `moistureRaw` value.
+4. Record this value as:
+
+- `air_raw`
+
+
+### Step 2: Read value in dry soil
+
+1. Insert the probe into completely dry soil.
+2. Keep probe depth consistent.
+3. Wait 2–3 minutes for stabilization.
+4. Observe the reported value.
+5. Record this value as:
+
+- `dry_soil_raw`
+
+
+### Step 3: Read value in wet soil
+
+1. Thoroughly water the soil until evenly moist.
+2. Do not flood the pot.
+3. Wait 3–5 minutes.
+4. Observe the reported value.
+5. Record this value as:
+
+- `wet_soil_raw`
+
+
+### Step 4: Determine direction
+
+Compare the three recorded values.
+
+If values **decrease** as moisture increases:
+- Wet soil → lower raw values
+- Dry soil → higher raw values
+
+If values **increase** as moisture increases:
+- Wet soil → higher raw values
+- Dry soil → lower raw values
+
+Document the result clearly:
+- Sensor direction: `wet = higher` OR `wet = lower`
+
+Do not proceed with calibration until direction is confirmed.
+
 
 ## Part 1: Establish “dry” baseline
 
