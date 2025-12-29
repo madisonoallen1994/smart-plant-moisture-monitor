@@ -57,7 +57,6 @@ This section describes how data moves through the system during normal operation
 6. The Home Hub adds a UTC timestamp to the reading.
 7. The Home Hub sends the reading to the local backend via HTTP.
 
----
 
 ### Detailed step-by-step flow
 
@@ -109,7 +108,6 @@ This section describes how data moves through the system during normal operation
   - `fwVersion`
 - Example (conceptual): `{"probeId":"probe-001","timestamp":"2025-12-29T03:16:29Z","moistureRaw":500,"fwVersion":"0.1.0"}`
 
----
 
 ### Polling behavior
 
@@ -117,7 +115,6 @@ This section describes how data moves through the system during normal operation
 - Each poll cycle is independent.
 - Failures do not stop future cycles.
 
----
 
 ### Failure handling (v0)
 
@@ -129,7 +126,6 @@ This section describes how data moves through the system during normal operation
   - Do not crash the hub
 - The next poll cycle proceeds as normal.
 
----
 
 ### v0 assumptions and constraints
 
@@ -140,14 +136,12 @@ This section describes how data moves through the system during normal operation
 
 These constraints are intentional for v0.
 
----
 
 ## Interfaces and Contracts (v0)
 
 This section defines the explicit interfaces between system components in v0.
 These contracts are intentionally small and stable.
 
----
 
 ### Probe → Hub (BLE GATT)
 
@@ -190,7 +184,6 @@ Notes:
 - Only the latest reading is exposed
 - No timestamp is included at the probe level in v0
 
----
 
 ### Hub → Backend (HTTP)
 
@@ -221,7 +214,6 @@ Example payload:
 - Ensure the payload matches the v0 data contract
 - Log failures without crashing
 
----
 
 ### Contract stability (v0)
 
@@ -234,7 +226,6 @@ The following are considered stable for v0:
 
 Any changes to these require a new contract version.
 
----
 
 ### Explicit exclusions (v0)
 
@@ -253,7 +244,6 @@ These may be added in future versions once v0 is validated.
 
 This section describes how the system behaves while running under normal and error conditions.
 
----
 
 ### Hub startup
 
@@ -264,7 +254,6 @@ When the Home Hub starts:
 - The polling loop is initialized.
 - No BLE connection is attempted until the first poll cycle begins.
 
----
 
 ### Poll cycle lifecycle
 
@@ -286,7 +275,6 @@ Each poll cycle follows the same sequence:
 
 Each poll cycle is independent of previous cycles.
 
----
 
 ### Timing behavior
 
@@ -294,7 +282,6 @@ Each poll cycle is independent of previous cycles.
 - Poll timing does not drift based on execution time.
 - Slow or failed operations do not block future cycles.
 
----
 
 ### BLE connection behavior
 
@@ -305,7 +292,6 @@ Each poll cycle is independent of previous cycles.
   - Avoid stale connections
   - Simplify failure recovery
 
----
 
 ### Failure handling
 
@@ -326,7 +312,6 @@ If the backend POST fails:
 - No retry is attempted in v0.
 - The hub continues polling on the next cycle.
 
----
 
 ### Logging behavior
 
@@ -338,7 +323,6 @@ If the backend POST fails:
   - Backend POST success or failure
 - Logging is intended for debugging and validation in v0.
 
----
 
 ### Shutdown behavior
 
@@ -346,7 +330,6 @@ If the backend POST fails:
 - No cleanup is required between runs.
 - Restarting the hub resumes polling normally.
 
----
 
 ### v0 design assumptions
 
@@ -363,7 +346,6 @@ These assumptions may change in future versions.
 This section lists features and concerns that are intentionally excluded from v0.
 Excluding these keeps the initial system simple, testable, and easy to debug.
 
----
 
 ### Cloud infrastructure
 
@@ -374,7 +356,6 @@ Excluding these keeps the initial system simple, testable, and easy to debug.
 
 v0 runs entirely on local hardware.
 
----
 
 ### Multiple probes
 
@@ -384,7 +365,6 @@ v0 runs entirely on local hardware.
 
 Multi-probe support will be addressed in a future version.
 
----
 
 ### Power optimization
 
@@ -394,7 +374,6 @@ Multi-probe support will be addressed in a future version.
 
 v0 prioritizes correctness over efficiency.
 
----
 
 ### Sensor calibration and interpretation
 
@@ -405,7 +384,6 @@ v0 prioritizes correctness over efficiency.
 
 Raw sensor values are passed through unchanged.
 
----
 
 ### Data durability and retries
 
@@ -415,7 +393,6 @@ Raw sensor values are passed through unchanged.
 
 Temporary data loss is acceptable in v0.
 
----
 
 ### Alerts and automation
 
@@ -425,7 +402,6 @@ Temporary data loss is acceptable in v0.
 
 v0 is observational only.
 
----
 
 ### Security and authentication
 
@@ -435,7 +411,6 @@ v0 is observational only.
 
 Security will be addressed after functional validation.
 
----
 
 ### UI and visualization
 
@@ -445,7 +420,6 @@ Security will be addressed after functional validation.
 
 Data inspection is done via logs and local tools only.
 
----
 
 ### Summary
 
