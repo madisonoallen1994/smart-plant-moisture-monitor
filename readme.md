@@ -36,3 +36,6 @@ Soil Sensor → BLE Plant Probe → Raspberry Pi Hub → Local Backend → Local
 
 ## How we work
 We only move forward when the current step passes its exit criteria.
+
+## Documentation
+All detailed documentation lives in [`/docs`](./docs/readme.md).
