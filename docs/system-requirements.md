@@ -4,8 +4,10 @@ title: System Requirements
 date: '2025-12-28 21:20:00.000'
 from_notion: https://www.notion.so/System-Requirements-2d735ae5cc5080bab8fde142396adca7
 author: Madison Allen
-last_edited_time: '2025-12-29 02:40:00.000'
+last_edited_time: '2025-12-29 02:42:00.000'
 ---
+Updated documentation!!!
+
 ## 1. Purpose
 
 This document defines the functional and non-functional requirements for the **v0 local prototype** of the Smart Plant Soil Moisture Monitoring System.
