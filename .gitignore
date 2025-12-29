@@ -1,0 +1,33 @@
+# OS
+.DS_Store
+
+# Node
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.env
+
+# Builds
+dist
+build
+coverage
+
+# React Native
+ios/build
+android/app/build
+android/.gradle
+*.keystore
+
+# Logs
+*.log
+
+# SQLite
+*.sqlite
+*.sqlite3
+
+# IDE
+.vscode
+.idea
+EOF
