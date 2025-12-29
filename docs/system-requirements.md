@@ -4,7 +4,7 @@ title: System Requirements
 date: '2025-12-28 21:20:00.000'
 from_notion: https://www.notion.so/System-Requirements-2d735ae5cc5080bab8fde142396adca7
 author: Madison Allen
-last_edited_time: '2025-12-29 02:44:00.000'
+last_edited_time: '2025-12-29 05:10:00.000'
 ---
 ## 1. Purpose
 
@@ -23,8 +23,6 @@ The v0 scope includes:
 - Optional mobile app consuming the same local APIs
 
 Cloud infrastructure and remote push notifications are **explicitly out of scope** for this phase.
-
----
 
 ## 2. System Overview
 
@@ -45,8 +43,6 @@ The system operates entirely on a **local network**.
 Soil Sensor → BLE Probe → Raspberry Pi Hub → Local Backend → App / Alerts
 
 ```
-
----
 
 ## 3. Plant Probe Subsystem Requirements
 
@@ -74,8 +70,6 @@ Soil Sensor → BLE Probe → Raspberry Pi Hub → Local Backend → App / Alert
 
 - STEMMA JST-PH cabling
 
----
-
 ### 3.2 Functional Requirements (Probe)
 
 - The probe measures soil moisture using capacitive sensing.
@@ -88,8 +82,6 @@ Soil Sensor → BLE Probe → Raspberry Pi Hub → Local Backend → App / Alert
 
 - The probe returns to deep sleep after completing each reading cycle.
 
----
-
 ### 3.3 Power and Battery Requirements
 
 - The probe minimizes power usage through aggressive sleep cycles.
@@ -99,8 +91,6 @@ Soil Sensor → BLE Probe → Raspberry Pi Hub → Local Backend → App / Alert
 - The probe targets multi-week battery life under normal usage.
 
 - The probe exposes battery charging status through firmware state or onboard indicators.
-
----
 
 ### 3.4 Data Requirements (Probe Output)
 
@@ -117,8 +107,6 @@ Optional data supported in future versions includes:
 - Battery level
 
 - Signal strength (RSSI)
-
----
 
 ## 4. Home Hub Subsystem Requirements
 
@@ -140,8 +128,6 @@ Optional data supported in future versions includes:
 
 - External 5V micro-USB power supply
 
----
-
 ### 4.2 Functional Requirements (Hub)
 
 - The hub scans continuously for BLE broadcasts from probes.
@@ -154,8 +140,6 @@ Optional data supported in future versions includes:
 
 - The hub retries uploads when the backend is temporarily unavailable.
 
----
-
 ### 4.3 Reliability Requirements (Hub)
 
 - The hub recovers automatically after power loss.
@@ -163,8 +147,6 @@ Optional data supported in future versions includes:
 - The hub starts required services on boot without user intervention.
 
 - The hub logs BLE scan events, uploads, and failures for debugging.
-
----
 
 ## 5. Local Backend Subsystem Requirements
 
@@ -184,8 +166,6 @@ Optional data supported in future versions includes:
 
 - SQLite for persistent storage
 
----
-
 ### 5.2 Functional Requirements (Backend)
 
 - The backend accepts moisture readings from the hub via HTTP.
@@ -199,8 +179,6 @@ Optional data supported in future versions includes:
 - The backend evaluates moisture readings against configured thresholds.
 
 - The backend computes plant status (e.g., “OK”, “Needs Water”).
-
----
 
 ### 5.3 Alerting Requirements (Local)
 
@@ -218,8 +196,6 @@ Optional data supported in future versions includes:
 
 Push notifications and cloud messaging are not required for v0.
 
----
-
 ### 5.4 Data Model Requirements
 
 The backend supports the following entities:
@@ -234,8 +210,6 @@ The backend supports the following entities:
 
 - Alert events
 
----
-
 ## 6. Mobile Application Requirements (Optional for v0)
 
 ### 6.1 Platform Requirements
@@ -245,8 +219,6 @@ The backend supports the following entities:
 - The mobile app communicates with the local backend over HTTP.
 
 - The mobile app operates on the same local network as the backend.
-
----
 
 ### 6.2 Functional Requirements (App)
 
@@ -272,8 +244,6 @@ The backend supports the following entities:
 
 - The system limits alert frequency to prevent notification fatigue.
 
----
-
 ## 8. Security and Privacy Requirements (v0)
 
 - BLE communication does not transmit personal user data.
@@ -283,8 +253,6 @@ The backend supports the following entities:
 - No user authentication is required for v0.
 
 - Personal data storage is minimal and local-only.
-
----
 
 ## 9. Scalability and Future Compatibility
 
@@ -302,8 +270,6 @@ The system design supports future expansion to:
 
 The v0 local backend mirrors the API shape expected for future cloud deployment to minimize refactoring.
 
----
-
 ## 10. v0 Acceptance Criteria
 
 The system is considered successful when:
@@ -319,16 +285,4 @@ The system is considered successful when:
 - Alerts trigger at the correct thresholds
 
 - The system operates unattended on a local network for multiple days
-
----
-
-## Next Step
-
-We are now ready to proceed with **Step 0.1: Repository Setup**, using this updated architecture.
-
-When you’re ready, say:
-
-> “Let’s set up the repo.”
-
-and I’ll walk you through it with the backend scoped correctly as **local-first**.
 
