@@ -27,3 +27,9 @@ The payload sent from the hub to the backend will include the following fields:
 - Probe → Hub uses BLE GATT (Option A).
 - Hub reads the latest reading from a GATT characteristic.
 - Hub attaches timestamp and POSTs JSON to the backend.
+
+## BLE GATT (Probe → Hub)
+- Device name: PlantProbe
+- Service UUID: 12345678-1234-1234-1234-1234567890ab
+- Characteristic UUID (latestReading): 12345678-1234-1234-1234-1234567890ac
+- Characteristic value: UTF-8 JSON string
