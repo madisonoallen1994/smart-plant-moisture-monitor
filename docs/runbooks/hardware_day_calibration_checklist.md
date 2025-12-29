@@ -7,7 +7,7 @@ The goal of v0 calibration is to establish **reference values**, not perfection.
 
 Follow these steps in order.
 
----
+
 
 ## Prerequisites
 
@@ -21,7 +21,6 @@ Before starting calibration, confirm:
 
 Do not proceed until all prerequisites are met.
 
----
 
 ## Calibration concepts (read first)
 
@@ -35,7 +34,6 @@ Do not proceed until all prerequisites are met.
 
 In v0, calibration is **manual and observational**.
 
----
 
 ## Part 1: Establish “dry” baseline
 
@@ -52,8 +50,6 @@ Example:
 
 Repeat the reading several times to confirm stability.
 
----
-
 ## Part 2: Establish “dry soil” baseline
 
 1. Insert the probe into **completely dry soil**.
@@ -67,7 +63,6 @@ Repeat the reading several times to confirm stability.
 Example:
 - `dry_soil_value ≈ 650`
 
----
 
 ## Part 3: Establish “wet soil” baseline
 
@@ -82,7 +77,6 @@ Example:
 Example:
 - `wet_soil_value ≈ 350`
 
----
 
 ## Part 4: Sanity-check the ranges
 
@@ -97,7 +91,6 @@ If this is not true:
 - Reinsert the probe
 - Repeat measurements
 
----
 
 ## Part 5: Document calibration values
 
@@ -114,7 +107,6 @@ Record the following in a notes file or README:
 
 These values are specific to each plant and probe.
 
----
 
 ## Part 6: Define provisional ranges (v0)
 
@@ -128,7 +120,6 @@ These ranges are **informational only** in v0.
 
 No automation or alerts are triggered.
 
----
 
 ## Success criteria (stop here)
 
@@ -144,7 +135,6 @@ At this point, the system is ready for:
 - Threshold tuning
 - Future automation
 
----
 
 ## Notes
 
