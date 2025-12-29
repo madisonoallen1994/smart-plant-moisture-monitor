@@ -4,12 +4,8 @@ title: Product Specification
 date: '2025-12-28 21:26:00.000'
 from_notion: https://www.notion.so/Product-Specification-2d735ae5cc5080aa8fd4dc53ab910b06
 author: Madison Allen
-last_edited_time: '2025-12-29 02:15:00.000'
+last_edited_time: '2025-12-29 02:24:00.000'
 ---
-page url: [https://www.notion.so/Product-Specification-2d735ae5cc5080aa8fd4dc53ab910b06](https://www.notion.so/Product-Specification-2d735ae5cc5080aa8fd4dc53ab910b06)
-
-page id: [2d735ae5cc5080aa8fd4dc53ab910b06](https://www.notion.so/Product-Specification-2d735ae5cc5080aa8fd4dc53ab910b06)
-
 ## 1. Product Overview
 
 ### What This Product Is
