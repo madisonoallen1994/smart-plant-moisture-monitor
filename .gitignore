@@ -31,3 +31,6 @@ android/.gradle
 .vscode
 .idea
 EOF
+
+.venv/
+hub/.venv/

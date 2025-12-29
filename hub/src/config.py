@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from dotenv import load_dotenv
+from typing import Optional
 import os
 
 load_dotenv()
@@ -10,17 +11,19 @@ def _get_bool(key: str, default: bool) -> bool:
     return default
   return raw.strip().lower() in {"1", "true", "yes", "y", "on"}
 
+
 @dataclass(frozen=True)
 class Config:
   backend_ingest_url: str
-  probe_name: str | None
-  probe_address: str | None
+  probe_name: Optional[str]
+  probe_address: Optional[str]
   service_uuid: str
   char_uuid: str
   poll_interval_seconds: int
   log_level: str
   log_file: str
   dry_run: bool
+
 
 def load_config() -> Config:
   backend_ingest_url = os.getenv("BACKEND_INGEST_URL", "http://localhost:3000/api/v0/readings")
