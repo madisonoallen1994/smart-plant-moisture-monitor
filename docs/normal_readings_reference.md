@@ -183,6 +183,65 @@ They are not yet used for:
 
 Those come later.
 
+## Known Good Reference Payloads (v0)
+Raw moisture direction is sensor-dependent. We will confirm whether wet reads higher or lower on hardware day and then lock thresholds.
+
+### Dry soil (needs watering)
+- Typical scenario: dry potting mix, plant overdue for watering
+- Expect higher raw values (less capacitance)
+
+```json
+{
+  "probeId": "probe-001",
+  "timestamp": "2025-12-28T12:00:00Z",
+  "moistureRaw": "DRY_RAW",
+  "batteryMv": 3700,
+  "fwVersion": "1.0.0"
+}
+```
+
+### Ideal soil moisture
+- Typical scenario: well-watered indoor plant after drainage
+- This is the target range for most houseplants
+
+```json
+{
+  "probeId": "probe-001",
+  "timestamp": "2025-12-28T12:00:00Z",
+  "moistureRaw": "IDEAL_RAW",
+  "batteryMv": 3700,
+  "fwVersion": "1.0.0"
+}
+```
+
+### Wet soil 
+- Typical scenario: just watered, soil still saturated
+- Expect lower raw values (higher capacitance)
+
+```json
+{
+  "probeId": "probe-001",
+  "timestamp": "2025-12-28T12:00:00Z",
+  "moistureRaw": "WET_RAW",
+  "batteryMv": 3700,
+  "fwVersion": "1.0.0"
+}
+```
+
+### Sensor offline 
+- Typical scenario: sensor disconnected, I²C failure, or read error
+- v0 behavior: omit moistureRaw or send sentinel value
+
+```json
+{
+  "probeId": "probe-001",
+  "timestamp": "2025-12-28T12:00:00Z",
+  "moistureRaw": null, 
+  "batteryMv": 3700,
+  "fwVersion": "1.0.0"
+}
+```
+
 
 ## Summary
 
@@ -207,3 +266,5 @@ Use trends, not single values, to judge plant health.
 - Recalibration may be needed over time
 
 This document is a reference, not a rulebook.
+
+
