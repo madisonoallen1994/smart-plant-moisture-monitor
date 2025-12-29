@@ -431,3 +431,41 @@ v0 exists to prove that:
 - The system is debuggable and understandable
 
 Once these are validated, future versions can safely expand scope.
+
+
+---
+
+## Diagram (Mermaid)
+
+```mermaid
+flowchart LR
+  %% v0 data path: PlantProbe -> Home Hub -> Local Backend
+
+  subgraph Probe["PlantProbe (device)"]
+    Sensor["Capacitive Soil Moisture Sensor (I²C)"]
+    FW["Firmware (Feather nRF52)\n- reads sensor\n- exposes GATT"]
+    Sensor -->|I²C| FW
+  end
+
+  subgraph BLE["BLE GATT (Probe → Hub)"]
+    Adv["Advertises as: PlantProbe"]
+    Svc["Service UUID\n12345678-1234-1234-1234-1234567890ab"]
+    Char["Characteristic: latestReading\nUUID 12345678-1234-1234-1234-1234567890ac\nValue: UTF-8 JSON string"]
+    Adv --> Svc --> Char
+  end
+
+  subgraph Hub["Home Hub (local)"]
+    HubSvc["Python Hub Service\n(bleak + requests)"]
+    Poll["Poll loop\nconnect → read → disconnect\nrepeat every N seconds"]
+    HubSvc --> Poll
+  end
+
+  subgraph Backend["Local Backend (v0)"]
+    API["HTTP ingest\nPOST /api/v0/readings"]
+    Store["Storage/logging (v0)"]
+    API --> Store
+  end
+
+  FW -->|Expose GATT service| BLE
+  Poll -->|Read latestReading| Char
+  Poll -->|POST JSON payload| API
