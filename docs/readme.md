@@ -17,3 +17,6 @@ See `runbooks/` for step-by-step checklists used when hardware arrives:
 - BLE validation
 - Sensor wiring
 - Calibration
+
+## Diagrams
+- v0 Architecture Diagram: `diagrams/architecture_v0.md`
