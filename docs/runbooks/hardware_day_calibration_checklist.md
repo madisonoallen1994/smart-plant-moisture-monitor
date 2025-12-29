@@ -8,7 +8,6 @@ The goal of v0 calibration is to establish **reference values**, not perfection.
 Follow these steps in order.
 
 
-
 ## Prerequisites
 
 Before starting calibration, confirm:
@@ -35,6 +34,9 @@ Do not proceed until all prerequisites are met.
 In v0, calibration is **manual and observational**.
 
 ## Direction Confirmation Checklist (required)
+// TODO(v0-calibration): Confirm sensor direction (wet = higher or lower raw) and document DRY_RAW / MID_RAW / WET_RAW values.
+Expected: air_raw should represent the driest possible reading for this sensor.
+
 
 Before recording any calibration values, confirm how this specific sensor reports moisture.
 
