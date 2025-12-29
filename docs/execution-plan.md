@@ -4,21 +4,15 @@ title: Execution Plan
 date: '2025-12-28 23:06:00.000'
 from_notion: https://www.notion.so/Execution-Plan-2d735ae5cc50807abee2f87b0257db30
 author: Madison Allen
-last_edited_time: '2025-12-29 02:44:00.000'
+last_edited_time: '2025-12-29 05:14:00.000'
 ---
-<br/>
-
-Updated documentation!!!
-
-### Ground rules for this plan
+## Ground rules for this plan
 
 - v0 scope: **1 plant, 1 probe, 1 hub, 1 app**
 
 - You only move forward when the current step passes its **Exit Criteria**
 
 - Keep everything “boring” and observable: logs, timestamps, and simple status screens
-
----
 
 ## Phase 0 — Prep and workspace
 
@@ -64,8 +58,6 @@ Recommended v0 payload (keep it minimal):
 
 - A single agreed payload format written down.
 
----
-
 ## Phase 1 — Hardware bring-up (use Hardware Agent Prompt)
 
 ### Step 1.1 — Wire the sensor to the Feather via STEMMA QT
@@ -89,8 +81,6 @@ Recommended v0 payload (keep it minimal):
 **Exit criteria**
 
 - I²C scanner prints the sensor address reliably.
-
----
 
 ## Phase 2 — Probe firmware MVP (use Firmware Agent Prompt)
 
@@ -142,8 +132,6 @@ Recommended v0 payload (keep it minimal):
 
 - In test mode (1-minute interval), the probe wakes and broadcasts repeatedly without crashing.
 
----
-
 ## Phase 3 — Hub MVP (use Firmware Prompt for hub behavior + Orchestrator)
 
 ### Step 3.1 — Raspberry Pi setup
@@ -191,8 +179,6 @@ Recommended v0 payload (keep it minimal):
 **Exit criteria**
 
 - You see payloads arriving end-to-end: probe → hub → endpoint.
-
----
 
 ## Phase 4 — Backend MVP (use Backend Agent Prompt)
 
@@ -252,8 +238,6 @@ Recommended v0 payload (keep it minimal):
 
 - You can trigger an alert event on demand and see it flow to notification logic.
 
----
-
 ## Phase 5 — Mobile app MVP (use Mobile App Agent Prompt)
 
 ### Step 5.1 — Mobile: basic screens with mock data
@@ -308,8 +292,6 @@ Recommended v0 payload (keep it minimal):
 
 - You receive a push notification when backend triggers one.
 
----
-
 ## Phase 6 — End-to-end validation (Orchestrator + test checklist)
 
 ### Step 6.1 — Real soil test
@@ -356,8 +338,6 @@ Recommended v0 payload (keep it minimal):
 
 - No missed wake-ups and hub receives each reading.
 
----
-
 ## Phase 7 — Hardening tasks (still v0, but makes it “real”)
 
 ### Step 7.1 — Add offline states
@@ -386,8 +366,6 @@ Recommended v0 payload (keep it minimal):
 
 - Battery shows in app and updates occasionally.
 
----
-
 # How to use your prompts during execution
 
 Use this pattern for each phase:
@@ -406,8 +384,6 @@ Use this pattern for each phase:
 
 	- a quick validation checklist
 
----
-
 # Suggested milestones (so this stays fun and not overwhelming)
 
 1. **Milestone 1:** Sensor detected over I²C
@@ -423,8 +399,4 @@ Use this pattern for each phase:
 1. **Milestone 6:** Push notification triggers correctly
 
 1. **Milestone 7:** Probe sleeps/wakes on schedule
-
----
-
-If you want, I can turn this into a **Notion-ready checklist** (with checkboxes and “exit criteria” fields) or a **Jira epic with stories** for each step.
 

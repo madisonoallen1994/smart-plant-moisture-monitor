@@ -4,7 +4,7 @@ title: Product Specification
 date: '2025-12-28 21:26:00.000'
 from_notion: https://www.notion.so/Product-Specification-2d735ae5cc5080aa8fd4dc53ab910b06
 author: Madison Allen
-last_edited_time: '2025-12-29 02:24:00.000'
+last_edited_time: '2025-12-29 05:06:00.000'
 ---
 ## 1. Product Overview
 
@@ -26,8 +26,6 @@ The system allows plant owners to:
 
 This document defines the **v0 local prototype**, which establishes the full end-to-end system without cloud dependencies.
 
----
-
 ## 2. Why This Product Exists
 
 ### User Problems
@@ -48,8 +46,6 @@ This document defines the **v0 local prototype**, which establishes the full end
 
 	- Poorly configurable for different plant types or soil mixes
 
----
-
 ### What This Product Solves
 
 - Passive, always-on soil moisture monitoring
@@ -59,8 +55,6 @@ This document defines the **v0 local prototype**, which establishes the full end
 - Automatic alerts when watering is needed
 
 - A modular system that scales from one plant to many
-
----
 
 ## 3. v0 Scope and Constraints
 
@@ -86,8 +80,6 @@ This document defines the **v0 local prototype**, which establishes the full end
 
 - Multi-user support
 
----
-
 ## 4. System Architecture (v0)
 
 The system consists of four components:
@@ -107,8 +99,6 @@ Soil Sensor → BLE Probe → Raspberry Pi Hub → Local Backend → Alerts / Ap
 ```
 
 All communication occurs on the **local network**.
-
----
 
 ## 5. Plant Probe
 
@@ -142,8 +132,6 @@ The plant probe continuously measures soil moisture and transmits readings wirel
 
 The probe remains battery-powered and physically unobtrusive.
 
----
-
 ## 6. Home Hub
 
 ### Purpose
@@ -158,8 +146,6 @@ The home hub bridges low-power BLE devices to the local network and backend.
 
 - External USB power supply
 
----
-
 ### Hub Behavior
 
 - The hub scans continuously for BLE broadcasts from probes.
@@ -171,8 +157,6 @@ The home hub bridges low-power BLE devices to the local network and backend.
 - The hub retries communication when the backend is unavailable.
 
 The hub operates continuously and requires no user interaction during normal operation.
-
----
 
 ## 7. Local Backend (v0)
 
@@ -204,8 +188,6 @@ The local backend acts as the system’s source of truth and alert engine.
 
 The backend API shape mirrors a future cloud backend to minimize refactoring later.
 
----
-
 ## 8. Alerts and Notifications (v0)
 
 ### Alert Behavior
@@ -223,8 +205,6 @@ The backend API shape mirrors a future cloud backend to minimize refactoring lat
 - Optional desktop notifications
 
 Push notifications and remote alerts are deferred to future versions.
-
----
 
 ## 9. Mobile App (Optional for v0)
 
@@ -244,8 +224,6 @@ The mobile app provides visibility into plant moisture levels and alert state.
 
 The app communicates with the local backend over HTTP and operates on the same network.
 
----
-
 ## 10. Calibration and Thresholds
 
 ### Initial Calibration
@@ -262,8 +240,6 @@ The app communicates with the local backend over HTTP and operates on the same n
 
 - Automated wet/dry calibration flows
 
----
-
 ## 11. Scalability and Future Direction
 
 The v0 architecture supports future expansion to:
@@ -279,8 +255,6 @@ The v0 architecture supports future expansion to:
 - Additional sensors (temperature, light, humidity)
 
 These capabilities are intentionally out of scope for v0 but unblocked by design.
-
----
 
 ## 12. v0 Success Criteria
 
