@@ -187,8 +187,7 @@ Those come later.
 Raw moisture direction is sensor-dependent. We will confirm whether wet reads higher or lower on hardware day and then lock thresholds.
 
 ### Dry soil (needs watering)
-- Typical scenario: dry potting mix, plant overdue for watering
-- Expect higher raw values (less capacitance)
+-Typical scenario: dry potting mix, plant overdue for watering
 
 ```json
 {
@@ -202,7 +201,6 @@ Raw moisture direction is sensor-dependent. We will confirm whether wet reads hi
 
 ### Ideal soil moisture
 - Typical scenario: well-watered indoor plant after drainage
-- This is the target range for most houseplants
 
 ```json
 {
@@ -216,7 +214,8 @@ Raw moisture direction is sensor-dependent. We will confirm whether wet reads hi
 
 ### Wet soil 
 - Typical scenario: just watered, soil still saturated
-- Expect lower raw values (higher capacitance)
+- Short-term readings in this range are normal
+- Persistently low values may indicate overwatering
 
 ```json
 {
@@ -230,7 +229,6 @@ Raw moisture direction is sensor-dependent. We will confirm whether wet reads hi
 
 ### Sensor offline 
 - Typical scenario: sensor disconnected, I²C failure, or read error
-- v0 behavior: omit moistureRaw or send sentinel value
 
 ```json
 {
