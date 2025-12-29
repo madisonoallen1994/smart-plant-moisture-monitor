@@ -3,7 +3,10 @@ name: Sync Notion docs
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 6 * * *" # daily at 06:00 UTC (change anytime)
+    - cron: "0 6 * * *" # daily at 06:00 UTC (optional)
+  push:
+    branches:
+      - master
 
 permissions:
   contents: write
