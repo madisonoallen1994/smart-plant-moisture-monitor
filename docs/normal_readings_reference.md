@@ -184,11 +184,18 @@ They are not yet used for:
 Those come later.
 
 ## Known Good Reference Payloads (v0)
-Raw moisture direction is sensor-dependent. We will confirm whether wet reads higher or lower on hardware day and then lock thresholds.
+Raw moisture direction is sensor-dependent. 
+- Some sensors report higher values
+when wet; others report lower values when wet. 
+- We will confirm the direction on
+hardware day and then lock numeric thresholds.
+
+
 
 ### Dry soil (needs watering)
--Typical scenario: dry potting mix, plant overdue for watering
-
+- Definition: soil contains minimal moisture
+- Relative position: farthest from “wet” baseline
+- Expect this value to be at one extreme of the sensor’s range
 ```json
 {
   "probeId": "probe-001",
@@ -200,23 +207,23 @@ Raw moisture direction is sensor-dependent. We will confirm whether wet reads hi
 ```
 
 ### Ideal soil moisture
-- Typical scenario: well-watered indoor plant after drainage
-
+- Definition: soil moisture level appropriate for normal plant health
+- Relative position: between dry and wet baselines
+- This is the target operating range
 ```json
 {
   "probeId": "probe-001",
   "timestamp": "2025-12-28T12:00:00Z",
-  "moistureRaw": "IDEAL_RAW",
+  "moistureRaw": "MID_RAW",
   "batteryMv": 3700,
   "fwVersion": "1.0.0"
 }
 ```
 
 ### Wet soil 
-- Typical scenario: just watered, soil still saturated
-- Short-term readings in this range are normal
-- Persistently low values may indicate overwatering
-
+- Definition: soil is saturated or near saturation
+- Relative position: opposite extreme from dry baseline
+- May occur immediately after watering
 ```json
 {
   "probeId": "probe-001",
@@ -228,8 +235,8 @@ Raw moisture direction is sensor-dependent. We will confirm whether wet reads hi
 ```
 
 ### Sensor offline 
-- Typical scenario: sensor disconnected, I²C failure, or read error
-
+- Definition: sensor cannot be read or returns invalid data
+- Used when I²C read fails or sensor is disconnected
 ```json
 {
   "probeId": "probe-001",
@@ -240,6 +247,24 @@ Raw moisture direction is sensor-dependent. We will confirm whether wet reads hi
 }
 ```
 
+## Determining Sensor Direction (Hardware Day)
+
+On hardware day, confirm the sensor’s behavior:
+1. Read value with probe in air
+2. Read value in dry soil
+3. Read value in very wet soil
+
+If values decrease as moisture increases:
+- Wet = lower values
+- Dry = higher values
+
+If values increase as moisture increases:
+- Wet = higher values
+- Dry = lower values
+
+Once confirmed:
+- Replace DRY_RAW, MID_RAW, and WET_RAW with real values
+- Update calibration and threshold docs accordingly
 
 ## Summary
 
