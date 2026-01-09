@@ -97,5 +97,3 @@ The hub may eventually:
 - Add retry or buffering logic
 - Forward data to a cloud backend
 For now, it is optimized for clarity, debuggability, and hardware-day reliability.
-
-# Hello
