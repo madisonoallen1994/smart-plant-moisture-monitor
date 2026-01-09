@@ -1,7 +1,7 @@
 #include <bluefruit.h>
 
 // v0 BLE identity
-static const char* DEVICE_NAME = "PlantProbe";
+static const char* DEVICE_NAME = "Plant";
 
 // v0 UUIDs (must match docs/contracts.md)
 static const char* SERVICE_UUID_STR = "12345678-1234-1234-1234-1234567890ab";
@@ -41,17 +41,6 @@ static void buildPayload(char* outBuf, size_t outSize) {
   );
 }
 
-// Optional: characteristic read callback (updates value right before it is read)
-void onCharRead(uint16_t conn_hdl, BLECharacteristic* chr, uint8_t* data, uint16_t len) {
-  (void) conn_hdl;
-  (void) data;
-  (void) len;
-
-  char payload[160];
-  buildPayload(payload, sizeof(payload));
-
-  chr->setValue((uint8_t*)payload, strlen(payload));
-}
 
 void setup() {
   Serial.begin(115200);
@@ -77,15 +66,13 @@ void setup() {
   // Max size for JSON payload
   latestReadingChar.setMaxLen(160);
 
-  // Initialize value once
+  // Start the characteristic FIRST
+  latestReadingChar.begin();
+
+  // Initialize value once (after begin)
   char payload[160];
   buildPayload(payload, sizeof(payload));
-  latestReadingChar.setValue((uint8_t*)payload, strlen(payload));
-
-  // Update value right before a central reads it
-  latestReadingChar.setReadCallback(onCharRead);
-
-  latestReadingChar.begin();
+  latestReadingChar.write((uint8_t*)payload, strlen(payload));
 
   // Advertising
   Bluefruit.Advertising.stop();
@@ -115,23 +102,26 @@ void setup() {
 }
 
 void loop() {
-  // Optional: if a central is connected AND notifications are enabled,
-  // push an updated JSON payload periodically.
-  static uint32_t lastNotifyMs = 0;
-  const uint32_t notifyIntervalMs = 5000;
+  static uint32_t lastUpdateMs = 0;
+  const uint32_t updateIntervalMs = 2000; // keep fresh for read-based hub
 
-  if (Bluefruit.connected() && latestReadingChar.notifyEnabled()) {
-    uint32_t now = millis();
-    if (now - lastNotifyMs >= notifyIntervalMs) {
-      lastNotifyMs = now;
+  uint32_t now = millis();
+  if (now - lastUpdateMs >= updateIntervalMs) {
+    lastUpdateMs = now;
 
-      char payload[160];
-      buildPayload(payload, sizeof(payload));
+    char payload[160];
+    buildPayload(payload, sizeof(payload));
 
-      latestReadingChar.setValue((uint8_t*)payload, strlen(payload));
+    // Always keep characteristic value up to date for GATT reads
+    latestReadingChar.write((uint8_t*)payload, strlen(payload));
+
+    // Only notify if a central subscribed
+    if (Bluefruit.connected() && latestReadingChar.notifyEnabled()) {
       latestReadingChar.notify((uint8_t*)payload, strlen(payload));
-
       Serial.print("Notify payload: ");
+      Serial.println(payload);
+    } else {
+      Serial.print("Updated value (no notify): ");
       Serial.println(payload);
     }
   }

@@ -1,5 +1,6 @@
 import asyncio
 import json
+import os
 from typing import Any, Optional
 
 from bleak import BleakClient, BleakScanner
@@ -16,13 +17,15 @@ async def find_probe_address(
 
   assert probe_name is not None
 
-  scan_timeout_seconds = 8.0
+  scan_timeout_seconds = float(os.getenv("BLE_SCAN_TIMEOUT_SECONDS", "8.0"))
   logger.info(f'BLE identity: scanning up to {scan_timeout_seconds}s for PROBE_NAME="{probe_name}"')
   devices = await BleakScanner.discover(timeout=scan_timeout_seconds)
 
   for d in devices:
-    if (d.name or "").strip() == probe_name:
-      logger.info(f'BLE identity: resolved address={d.address} name="{d.name}" rssi={getattr(d, "rssi", None)}')
+    name = (d.name or "").strip()
+
+    if name == probe_name:
+      logger.info(f'BLE identity: resolved address={d.address} name="{name}"')
       return d.address
 
   raise RuntimeError(
