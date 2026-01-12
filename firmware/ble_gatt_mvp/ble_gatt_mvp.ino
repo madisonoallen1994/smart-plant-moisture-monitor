@@ -1,7 +1,9 @@
 #include <bluefruit.h>
+#include <Wire.h>
+#include <Adafruit_seesaw.h>
 
 // v0 BLE identity
-static const char* DEVICE_NAME = "Plant";
+static const char* DEVICE_NAME = "PlantProbe";
 
 // v0 UUIDs (must match docs/contracts.md)
 static const char* SERVICE_UUID_STR = "12345678-1234-1234-1234-1234567890ab";
@@ -13,17 +15,28 @@ BLECharacteristic latestReadingChar(CHAR_UUID_STR);
 
 // v0 payload fields
 static const char* PROBE_ID   = "probe-001";
-static const char* FW_VERSION = "0.1.0";
+static const char* FW_VERSION = "0.2.0";
 
-// For v0 we stub moistureRaw until the sensor is wired
-static int readMoistureRawStub() {
-  return 500;
+// Seesaw soil sensor (I2C address 0x36 is default for STEMMA Soil Sensor)
+Adafruit_seesaw soilSensor;
+static bool sensorInitialized = false;
+
+// Read capacitive moisture from the STEMMA Soil Sensor
+// Returns raw capacitive value (typically 200-2000, higher = wetter)
+// Returns -1 if sensor not initialized or read fails
+static int readMoistureRaw() {
+  if (!sensorInitialized) {
+    return -1;
+  }
+
+  uint16_t capValue = soilSensor.touchRead(0);
+  return (int)capValue;
 }
 
 // Build UTF-8 JSON string for characteristic value.
 // Keep it small and deterministic.
 static void buildPayload(char* outBuf, size_t outSize) {
-  int moistureRaw = readMoistureRawStub();
+  int moistureRaw = readMoistureRaw();
 
   // Example v0 probe-side payload (hub will add timestamp when POSTing)
   // {
@@ -45,6 +58,18 @@ static void buildPayload(char* outBuf, size_t outSize) {
 void setup() {
   Serial.begin(115200);
   delay(200);
+
+  // Initialize I2C for soil sensor
+  Wire.begin();
+
+  // Initialize STEMMA Soil Sensor (default I2C address 0x36)
+  if (soilSensor.begin(0x36)) {
+    sensorInitialized = true;
+    Serial.println("STEMMA Soil Sensor initialized successfully.");
+  } else {
+    sensorInitialized = false;
+    Serial.println("ERROR: Could not find STEMMA Soil Sensor. Check wiring!");
+  }
 
   // Initialize Bluefruit stack
   Bluefruit.begin();

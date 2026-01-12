@@ -18,6 +18,8 @@ coverage
 ios/build
 android/app/build
 android/.gradle
+
+
 *.keystore
 
 # Logs
